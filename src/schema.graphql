@@ -9,4 +9,5 @@ type Query {
 
 type Mutation {
   signUp(params: SignUpInput): User!
+  signIn(email: String!, password: String!): UserWithToken
 }

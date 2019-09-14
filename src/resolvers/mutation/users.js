@@ -1,5 +1,6 @@
 import models from "../../models";
-import bcrypt from "bcrypt-nodejs";
+import { createToken } from "../../utils/token";
+import { encryptPassword, decryptPassword } from "../../utils/bcrypt";
 
 // 회원가입
 const signUp = async (_, { params }) => {
@@ -7,7 +8,7 @@ const signUp = async (_, { params }) => {
     where: { email: params.email },
     defaults: {
       ...params,
-      password: bcrypt.hashSync(params.password)
+      password: encryptPassword(params.password)
     }
   });
 
@@ -18,8 +19,28 @@ const signUp = async (_, { params }) => {
   return user;
 };
 
+// 로그인
+const signIn = async (_, { email, password }) => {
+  const user = await models.User.findOne({
+    where: {
+      email
+    }
+  });
+
+  if (!user) throw new Error("이메일을 확인해주세요.");
+
+  const isValidPassword = decryptPassword(password, user.password);
+  if (!isValidPassword) throw new Error("비밀번호를 확인해주세요.");
+
+  const payload = { email, id: user.id };
+  const token = await createToken(payload);
+
+  return { user, token };
+};
+
 const usersMutation = {
-  signUp
+  signUp,
+  signIn
 };
 
 export default usersMutation;
