@@ -1,4 +1,4 @@
-interface IStudy {
+type Study implements IStudy & IDate {
     id: ID
     name: String
     description: String
@@ -14,9 +14,18 @@ interface IStudy {
     isPrivate: Boolean
     UserId: Int
     StudySubjectId: Int
+    StudySubjects: [StudySubject]
+    StudyDays: [StudyDays]
+    createdAt: String
+    updateAt: String
 }
 
-interface IStudySubject {
+type StudySubject {
     id: ID
     title: String
+}
+
+type StudyDays {
+    id: ID
+    day: Int
 }

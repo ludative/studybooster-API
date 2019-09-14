@@ -1,2 +1,3 @@
 # import * from "./studies.graphql"
 # import * from "./users.graphql"
+# import * from "./common.graphql"
