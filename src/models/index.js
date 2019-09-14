@@ -1,15 +1,16 @@
 import fs from "fs";
 import path from "path";
 import Sequelize from "sequelize";
-import config from "../config";
+import config from "../../config";
+require('dotenv').config();
 
 const sequelize = new Sequelize(
-  config.db.database,
-  config.db.username,
-  config.db.password,
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
   {
     dialect: config.db.dialect,
-    host: config.db.host,
+    host: process.env.DB_HOST,
     timezone: config.db.timezone,
     define: {
       charset: "utf8",

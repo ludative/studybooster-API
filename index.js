@@ -1,8 +1,8 @@
 import { ApolloServer } from "apollo-server";
 import { importSchema } from 'graphql-import';
 import { makeExecutableSchema } from 'graphql-tools'
-import resolvers from "./src/resolvers";
 
+import resolvers from "./src/resolvers";
 import config from "./config";
 
 import db from "./db";

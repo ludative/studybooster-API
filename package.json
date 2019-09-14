@@ -12,6 +12,7 @@
   "dependencies": {
     "apollo-server": "^2.9.3",
     "bcrypt-nodejs": "^0.0.3",
+    "dotenv": "^8.1.0",
     "graphql-import": "^0.7.1",
     "graphql-tools": "^4.0.5",
     "mysql2": "^1.7.0",
