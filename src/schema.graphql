@@ -1,0 +1,11 @@
+# import * from "./schema/interfaces/index.graphql"
+# import * from "./schema/users.graphql"
+
+type Query {
+    getUsers: GetUsers
+    getUserById(id: Int!): User
+}
+
+type Mutation {
+    createUser: GetUsers
+}

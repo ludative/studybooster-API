@@ -1,9 +1,7 @@
-import { ApolloServer, gql } from "apollo-server";
-
-import type from "./graphql/schema/type";
-import query from "./graphql/schema/query";
-import interfaces from "./graphql/schema/interface";
-import resolvers from "./graphql/resolvers";
+import { ApolloServer } from "apollo-server";
+import { importSchema } from 'graphql-import';
+import { makeExecutableSchema } from 'graphql-tools'
+import resolvers from "./src/resolvers";
 
 import config from "./config";
 
@@ -11,13 +9,15 @@ import db from "./db";
 
 db();
 
-const typeDefs = gql`
-  ${interfaces}
-  ${type}
-  ${query}
-`;
-
-const server = new ApolloServer({ typeDefs, resolvers });
+const typeDefs = importSchema('src/schema.graphql');
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+  resolverValidationOptions: {
+    requireResolversForResolveType: false
+  }
+});
+const server = new ApolloServer({ schema });
 
 server.listen({ port: config.port }).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
