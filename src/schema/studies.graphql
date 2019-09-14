@@ -20,12 +20,12 @@ type Study implements IStudy & IDate {
     updateAt: String
 }
 
-type StudySubject {
+type StudySubject implements IStudySubject{
     id: ID
     title: String
 }
 
-type StudyDays {
+type StudyDays implements IStudyDays{
     id: ID
     day: Int
 }

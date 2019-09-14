@@ -20,3 +20,8 @@ interface IStudySubject {
     id: ID
     title: String
 }
+
+interface IStudyDays {
+    id: ID
+    day: Int
+}
