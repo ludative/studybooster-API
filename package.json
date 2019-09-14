@@ -1,0 +1,21 @@
+{
+  "name": "study-booster-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -r esm ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.3",
+    "bcrypt-nodejs": "^0.0.3",
+    "mysql2": "^1.7.0",
+    "sequelize": "^5.18.2"
+  },
+  "devDependencies": {
+    "esm": "^3.2.25"
+  }
+}
