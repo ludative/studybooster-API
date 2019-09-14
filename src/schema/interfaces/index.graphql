@@ -1,3 +1,2 @@
-interface IPagination {
-    count: Int!
-}
+# import * from "./studies.graphql"
+# import * from "./users.graphql"

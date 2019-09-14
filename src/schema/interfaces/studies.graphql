@@ -1,0 +1,24 @@
+interface IStudy {
+    id: ID
+    name: String
+    description: String
+    startDate: Float
+    endDate: Float
+    startTime: Int
+    endTime: Int
+    weekPeriod: Int
+    location: String
+    customSubject: String
+    thumbnail: String
+    limitedMemberCount: Int
+    isPrivate: Boolean
+    UserId: Int
+    StudySubjectId: Int
+    StudySubject: [IStudySubject]
+
+}
+
+interface IStudySubject {
+    id: ID
+    title: String
+}
