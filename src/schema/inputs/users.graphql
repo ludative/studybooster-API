@@ -1,0 +1,8 @@
+# 회원가입 Input
+input SignUpInput {
+  email: String!
+  password: String!
+  nickname: String!
+  introduction: String
+  profileImage: String
+}
