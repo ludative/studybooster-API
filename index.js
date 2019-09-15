@@ -26,7 +26,7 @@ const server = new ApolloServer({
 
     const user = token ? await verifyToken(token) : "";
 
-    return { user };
+    return { user, token };
   }
 });
 
