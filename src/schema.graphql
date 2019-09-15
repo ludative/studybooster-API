@@ -9,7 +9,7 @@ type Query {
 }
 
 type Mutation {
-  signUp(params: SignUpInput): User!
+  signUp(params: UserInput): User!
   signIn(email: String!, password: String!): UserWithToken
   createStudy(params: StudyInput): Study
 }
