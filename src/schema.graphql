@@ -15,4 +15,5 @@ type Mutation {
   signUp(params: SignUpInput): User!
   createStudy(params: StudyInput): Study
   createStudyBoard(params: StudyBoardInput): StudyBoard
+  deleteStudyBoard(id: Int!): GetStudyBoards
 }
