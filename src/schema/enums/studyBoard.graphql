@@ -1,0 +1,6 @@
+# 스터디 게시판 카테고리
+enum StudyBoardCategory {
+  NOTI # 공지사항
+  QNA # 문의사항
+  FREE # 자유게시판
+}

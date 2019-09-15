@@ -1,0 +1,6 @@
+input StudyBoardInput {
+  id: ID
+  title: String!
+  content: String!
+  category: StudyBoardCategory!
+}

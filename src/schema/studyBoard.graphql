@@ -1,0 +1,6 @@
+type StudyBoard implements IStudyBoard {
+  id: ID
+  title: String!
+  content: String!
+  category: String!
+}
