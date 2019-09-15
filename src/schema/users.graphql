@@ -1,5 +1,5 @@
-type User {
-  id: Int!
+type User implements IUser {
+  id: ID!
   email: String!
   nickname: String
   introduction: String
@@ -12,7 +12,7 @@ type User {
 
 type UserWithToken {
   user: User
-  token: String
+  token: String!
 }
 
 type GetUsers implements IPagination {
