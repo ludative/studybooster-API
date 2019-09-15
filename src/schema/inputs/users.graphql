@@ -5,4 +5,7 @@ input UserInput {
   nickname: String!
   introduction: String
   profileImage: String
+  isAdmin: Boolean
+  deleted: Boolean
+  isValidEmail: Boolean
 }
