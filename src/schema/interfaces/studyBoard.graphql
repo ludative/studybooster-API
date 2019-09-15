@@ -2,5 +2,5 @@ interface IStudyBoard {
   id: ID
   title: String
   content: String
-  category: String
+  category: StudyBoardCategory
 }
