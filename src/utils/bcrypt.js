@@ -6,6 +6,6 @@ export const encryptPassword = password => {
 };
 
 // 비밀번호 복호화
-export const decryptPassword = (password, hashPassword) => {
+export const comparePassword = (password, hashPassword) => {
   return bcrypt.compareSync(password, hashPassword);
 };

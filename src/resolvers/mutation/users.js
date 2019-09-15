@@ -1,6 +1,6 @@
 import models from "../../models";
 import { createToken } from "../../utils/token";
-import { encryptPassword, decryptPassword } from "../../utils/bcrypt";
+import { encryptPassword, comparePassword } from "../../utils/bcrypt";
 
 // 회원가입
 const signUp = async (_, { params }) => {
@@ -29,7 +29,7 @@ const signIn = async (_, { email, password }) => {
 
   if (!user) throw new Error("이메일을 확인해주세요.");
 
-  const isValidPassword = decryptPassword(password, user.password);
+  const isValidPassword = comparePassword(password, user.password);
   if (!isValidPassword) throw new Error("비밀번호를 확인해주세요.");
 
   const payload = { email, id: user.id };
