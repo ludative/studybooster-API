@@ -37,16 +37,13 @@ const signIn = async (_, { email, password }) => {
   return { user, token };
 };
 
-const updateUser = async (_, { params }) => {
-  const user = await models.User.findByPk(params.id);
+const updateUser = async (_, { params }, context) => {
+  if (!context.user.id) throw new Error("잘못된 접근입니다.");
+  const user = await models.User.findByPk(context.user.id);
   if (!user) throw new Error("존재하지 않는 회원입니다.");
-  console.log("user", user.get());
-  console.log("user", { ...params });
   await user.update({ ...params });
 
-  const _user = await models.User.findByPk(params.id);
-
-  return _user.get();
+  return user.get();
 };
 
 const usersMutation = {

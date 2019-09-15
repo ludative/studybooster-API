@@ -6,13 +6,3 @@ input UserInput {
   introduction: String
   profileImage: String
 }
-
-# 회원정보 변경 Input
-input UpdateUserInput {
-  # email: String
-  id: Int!
-  password: String
-  nickname: String
-  introduction: String
-  profileImage: String
-}
