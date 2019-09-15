@@ -3,4 +3,11 @@ type StudyBoard implements IStudyBoard {
   title: String!
   content: String!
   category: StudyBoardCategory!
+  createdAt: String
+  updatedAt: String
+}
+
+type GetStudyBoards implements IPagination {
+  count: Int!
+  rows: [StudyBoard]
 }
