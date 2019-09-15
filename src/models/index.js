@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import Sequelize from "sequelize";
 import config from "../../config";
-require('dotenv').config();
+require("dotenv").config();
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -40,13 +40,18 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User.hasMany(db.Study);
+db.User.hasMany(db.StudyBoard);
 
 db.Study.hasMany(db.StudyDay);
+db.Study.hasMany(db.StudyBoard);
 db.Study.belongsTo(db.User);
 db.Study.belongsTo(db.StudySubject);
 
 db.StudyDay.belongsTo(db.Study);
 
 db.StudySubject.hasMany(db.Study);
+
+db.StudyBoard.belongsTo(db.User);
+db.StudyBoard.belongsTo(db.Study);
 
 export default db;
