@@ -18,8 +18,21 @@ const signUp = async (_, { params }) => {
   return user;
 };
 
+const updateUser = async (_, { params }) => {
+  const user = await models.User.findByPk(params.id);
+  if (!user) throw new Error("존재하지 않는 회원입니다.");
+  console.log("user", user.get());
+  console.log("user", { ...params });
+  await user.update({ ...params });
+
+  const _user = await models.User.findByPk(params.id);
+
+  return _user.get();
+};
+
 const usersMutation = {
-  signUp
+  signUp,
+  updateUser
 };
 
 export default usersMutation;
