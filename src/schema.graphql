@@ -1,6 +1,7 @@
 # import * from "./schema/interfaces/index.graphql"
 # import * from "./schema/inputs/index.graphql"
 # import * from "./schema/users.graphql"
+# import * from "./schema/studies.graphql"
 
 type Query {
   getUsers: GetUsers
@@ -8,6 +9,8 @@ type Query {
 }
 
 type Mutation {
-  signUp(params: SignUpInput): User!
-  updateUser(params: UpdateUserInput): User!
+  signUp(params: UserInput): User!
+  signIn(email: String!, password: String!): UserWithToken
+  updateUser(params: UserInput): User!
+  createStudy(params: StudyInput): Study
 }
