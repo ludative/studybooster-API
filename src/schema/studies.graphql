@@ -17,7 +17,7 @@ type Study implements IStudy & IDate {
     StudySubjects: [StudySubject]
     StudyDays: [StudyDays]
     createdAt: String
-    updateAt: String
+    updatedAt: String
 }
 
 type StudySubject implements IStudySubject{

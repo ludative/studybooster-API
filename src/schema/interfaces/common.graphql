@@ -4,5 +4,5 @@ interface IPagination {
 
 interface IDate {
     createdAt: String
-    updateAt: String
+    updatedAt: String
 }
