@@ -38,12 +38,12 @@ const signIn = async (_, { email, password }) => {
 };
 
 const updateUser = async (_, { params }, context) => {
-  if (!context.user.id) throw new Error("잘못된 접근입니다.");
-  const user = await models.User.findByPk(context.user.id);
-  if (!user) throw new Error("존재하지 않는 회원입니다.");
+  if (!context.user) throw new Error("잘못된 접근입니다.");
+  const user = context.user;
+  params.password = encryptPassword(params.password);
   await user.update({ ...params });
 
-  return user.get();
+  return user;
 };
 
 const usersMutation = {
