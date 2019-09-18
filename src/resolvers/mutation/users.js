@@ -38,8 +38,6 @@ const signIn = async (_, { email, password }) => {
   });
 
   if (!user) throw new Error("이메일을 확인해주세요.");
-  const isValidEmail = user.isValidEmail;
-  if (!isValidEmail) throw new Error("이메일 검증 후 로그인 가능합니다.");
   const isValidPassword = comparePassword(password, user.password);
   if (!isValidPassword) throw new Error("비밀번호를 확인해주세요.");
 
