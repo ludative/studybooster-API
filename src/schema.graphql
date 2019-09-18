@@ -15,4 +15,7 @@ type Mutation {
   updateUser(params: UserInput): User!
   createStudy(params: StudyInput): Study
   sendMailValidation: Success
+  updatePassword(password: String!, newPassword: String!): User!
+  resetPassword(email: String!): Success
+  deleteUser: Success
 }

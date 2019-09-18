@@ -2,7 +2,9 @@ import dotenv from 'dotenv';
 import models from "../../models";
 import { createToken } from "../../utils/token";
 import { encryptPassword, comparePassword } from "../../utils/bcrypt";
-import {getMailValidationContent, sendMail} from "../../utils/mailer";
+import {getMailResetPassword, getMailValidationContent, sendMail} from "../../utils/mailer";
+import generateRandomString from "../../utils/genarateRandomString";
+import {authenticatedMiddleware} from "../../utils/middleware";
 
 dotenv.config();
 
@@ -53,19 +55,86 @@ const sendMailValidation = async (_, arg, {user, token}) => {
 };
 
 const updateUser = async (_, { params }, context) => {
-  if (!context.user) throw new Error("잘못된 접근입니다.");
   const user = context.user;
-  params.password = encryptPassword(params.password);
+  if (params.password) {
+    params.password = encryptPassword(params.password);
+  }
   await user.update({ ...params });
 
   return user;
 };
 
+const updatePassword = async (_, {password, newPassword}, {user}) => {
+  const isValidPrevPassword = comparePassword(password, user.password);
+  if (!isValidPrevPassword) throw new Error("비밀번호가 일치하지 않습니다.");
+  await user.update({ password: encryptPassword(newPassword) });
+  return user;
+};
+
+const resetPassword = async (_, {email}) => {
+  const user = await models.User.findOne({
+    where: {email}
+  });
+  if (!user) throw new Error('일치하는 이메일이 존재하지 않습니다.');
+  const newPassword = generateRandomString();
+  await sendMail(getMailResetPassword({email: user.email, newPassword}));
+  await user.update({ password: encryptPassword(newPassword) });
+  return {isSuccess: true};
+};
+
+const deleteUser = async (_, args, {user}) => {
+  const userStudies = await models.Study.findAll({
+    where: {
+      UserId: user.id
+    }
+  });
+
+  const promises = [];
+  const userStudyIds = [];
+
+  userStudies.forEach(userStudy => {
+    promises.push(userStudy.destroy());
+    userStudyIds.push(userStudy.id);
+  });
+
+  if (userStudyIds.length) {
+    userStudyIds.forEach(userStudyId => {
+      promises.push(
+          models.StudyBoard.destroy({
+            where: {
+              StudyId: userStudyId
+            }
+          }),
+          models.StudyDay.destroy({
+            where: {
+              StudyId: userStudyId
+            }
+          })
+      )
+    })
+  }
+
+  await Promise.all([
+      ...promises,
+      models.StudyBoard.destroy({
+        where: {
+          UserId: user.id
+        }
+      }),
+      user.destroy()
+  ]);
+
+  return {isSuccess: true};
+};
+
 const usersMutation = {
   signUp,
   signIn,
-  sendMailValidation,
-  updateUser
+  sendMailValidation: authenticatedMiddleware(sendMailValidation),
+  updateUser: authenticatedMiddleware(updateUser),
+  updatePassword: authenticatedMiddleware(updatePassword),
+  resetPassword: authenticatedMiddleware(resetPassword),
+  deleteUser: authenticatedMiddleware(deleteUser)
 };
 
 export default usersMutation;

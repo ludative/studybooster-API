@@ -1,8 +1,8 @@
 # 사용자 Input (회원가입/회원수정 시 사용)
 input UserInput {
-  email: String!
-  password: String!
-  nickname: String!
+  email: String
+  password: String
+  nickname: String
   introduction: String
   profileImage: String
   isAdmin: Boolean
