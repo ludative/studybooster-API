@@ -3,6 +3,8 @@ type StudyBoard implements IStudyBoard {
   title: String!
   content: String!
   category: StudyBoardCategory!
+  UserId: Int!
+  StudyId: Int!
   createdAt: String
   updatedAt: String
 }
