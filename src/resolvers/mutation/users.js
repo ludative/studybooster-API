@@ -18,7 +18,6 @@ const signUp = async (_, { params }) => {
 
   return user;
 };
-
 // 로그인
 const signIn = async (_, { email, password }) => {
   const user = await models.User.findOne({
@@ -38,9 +37,19 @@ const signIn = async (_, { email, password }) => {
   return { user, token };
 };
 
+const updateUser = async (_, { params }, context) => {
+  if (!context.user) throw new Error("잘못된 접근입니다.");
+  const user = context.user;
+  params.password = encryptPassword(params.password);
+  await user.update({ ...params });
+
+  return user;
+};
+
 const usersMutation = {
   signUp,
-  signIn
+  signIn,
+  updateUser
 };
 
 export default usersMutation;

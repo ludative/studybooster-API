@@ -11,5 +11,6 @@ type Query {
 type Mutation {
   signUp(params: UserInput): User!
   signIn(email: String!, password: String!): UserWithToken
+  updateUser(params: UserInput): User!
   createStudy(params: StudyInput): Study
 }
