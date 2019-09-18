@@ -9,6 +9,7 @@ type Query {
   getUsers: GetUsers
   getUserById(id: Int!): User
   getStudyBoards: GetStudyBoards
+  getStudyBoardById(id: Int!): StudyBoard
 }
 
 type Mutation {

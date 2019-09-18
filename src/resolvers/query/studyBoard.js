@@ -7,8 +7,16 @@ const getStudyBoards = async () => {
   return studyBoards;
 };
 
+// 스터디 상세 가져오기
+const getStudyBoardById = async (_, { id }) => {
+  const studyBoard = await models.StudyBoard.findByPk(id);
+
+  return studyBoard;
+};
+
 const studyBoardQuery = {
-  getStudyBoards
+  getStudyBoards,
+  getStudyBoardById
 };
 
 export default studyBoardQuery;
