@@ -10,6 +10,7 @@ type Query {
   getUserById(id: Int!): User
   getStudyBoards: GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
+  getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
 }
 
 type Mutation {
