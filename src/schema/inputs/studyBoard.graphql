@@ -3,7 +3,5 @@ input StudyBoardInput {
   title: String!
   content: String!
   category: StudyBoardCategory!
-  # TODO: !!!UserId => context 로 변경 요망!!!
-  UserId: Int!
   StudyId: Int!
 }
