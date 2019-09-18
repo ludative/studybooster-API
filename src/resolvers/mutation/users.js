@@ -27,7 +27,6 @@ const signUp = async (_, { params }) => {
 
   return user;
 };
-
 // 로그인
 const signIn = async (_, { email, password }) => {
   const user = await models.User.findOne({
@@ -50,13 +49,23 @@ const signIn = async (_, { email, password }) => {
 // 로그인 후 이메일 재발송
 const sendMailValidation = async (_, arg, {user, token}) => {
   await sendMail(getMailValidationContent({email: user.email, token}));
-  return { isSuccess: true };
+  return {isSuccess: true};
+};
+
+const updateUser = async (_, { params }, context) => {
+  if (!context.user) throw new Error("잘못된 접근입니다.");
+  const user = context.user;
+  params.password = encryptPassword(params.password);
+  await user.update({ ...params });
+
+  return user;
 };
 
 const usersMutation = {
   signUp,
   signIn,
-  sendMailValidation
+  sendMailValidation,
+  updateUser
 };
 
 export default usersMutation;
