@@ -20,4 +20,5 @@ type Mutation {
   createStudy(params: StudyInput): Study
   createStudyBoard(params: StudyBoardInput): StudyBoard
   deleteStudyBoard(id: Int!): GetStudyBoards
+  updateStudyBoard(params: StudyBoardInput): StudyBoard
 }

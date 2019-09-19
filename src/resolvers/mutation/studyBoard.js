@@ -25,9 +25,23 @@ const deleteStudyBoard = async (_, { id }, context) => {
   return studyBoards;
 };
 
+// 게시판 글 수정
+// StudyId도 입력받아서 체크해줘야 하는지?
+const updateStudyBoard = async (_, { params }, context) => {
+  const user = context.user;
+  const studyBoard = await models.StudyBoard.findByPk(params.id);
+  if (studyBoard.UserId !== user.id)
+    throw new Error("본인의 게시물만 수정할 수 있습니다.");
+
+  await studyBoard.update({ ...params });
+
+  return studyBoard;
+};
+
 const studyBoardMutations = {
   createStudyBoard,
-  deleteStudyBoard
+  deleteStudyBoard,
+  updateStudyBoard
 };
 
 export default studyBoardMutations;
