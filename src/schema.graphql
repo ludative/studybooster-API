@@ -3,6 +3,7 @@
 # import * from "./schema/enums/index.graphql"
 # import * from "./schema/users.graphql"
 # import * from "./schema/studies.graphql"
+# import * from "./schema/common.graphql"
 # import * from "./schema/studyBoard.graphql"
 
 type Query {
@@ -18,6 +19,10 @@ type Mutation {
   signIn(email: String!, password: String!): UserWithToken
   updateUser(params: UserInput): User!
   createStudy(params: StudyInput): Study
+  sendMailValidation: Success
+  updatePassword(password: String!, newPassword: String!): User!
+  resetPassword(email: String!): Success
+  deleteUser: Success
   createStudyBoard(params: StudyBoardInput): StudyBoard
   deleteStudyBoard(id: Int!): GetStudyBoards
   updateStudyBoard(params: StudyBoardInput): StudyBoard
