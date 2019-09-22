@@ -41,6 +41,7 @@ db.Sequelize = Sequelize;
 
 db.User.hasMany(db.Study);
 db.User.hasMany(db.StudyBoard);
+db.User.hasMany(db.StudyBoardComment);
 
 db.Study.hasMany(db.StudyDay);
 db.Study.hasMany(db.StudyBoard);
@@ -53,5 +54,9 @@ db.StudySubject.hasMany(db.Study);
 
 db.StudyBoard.belongsTo(db.User);
 db.StudyBoard.belongsTo(db.Study);
+db.StudyBoard.hasMany(db.StudyBoardComment);
+
+db.StudyBoardComment.belongsTo(db.StudyBoard);
+db.StudyBoardComment.belongsTo(db.User);
 
 export default db;
