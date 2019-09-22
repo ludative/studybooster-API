@@ -1,12 +1,17 @@
 # import * from "./schema/interfaces/index.graphql"
 # import * from "./schema/inputs/index.graphql"
+# import * from "./schema/enums/index.graphql"
 # import * from "./schema/users.graphql"
 # import * from "./schema/studies.graphql"
 # import * from "./schema/common.graphql"
+# import * from "./schema/studyBoard.graphql"
 
 type Query {
   getUsers: GetUsers
   getUserById(id: Int!): User
+  getStudyBoards: GetStudyBoards
+  getStudyBoardById(id: Int!): StudyBoard
+  getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
 }
 
 type Mutation {
@@ -18,4 +23,7 @@ type Mutation {
   updatePassword(password: String!, newPassword: String!): User!
   resetPassword(email: String!): Success
   deleteUser: Success
+  createStudyBoard(params: StudyBoardInput): StudyBoard
+  deleteStudyBoard(id: Int!): Success
+  updateStudyBoard(params: StudyBoardInput): StudyBoard
 }
