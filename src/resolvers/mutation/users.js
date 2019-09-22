@@ -132,7 +132,7 @@ const usersMutation = {
   sendMailValidation: authenticatedMiddleware(sendMailValidation),
   updateUser: authenticatedMiddleware(updateUser),
   updatePassword: authenticatedMiddleware(updatePassword),
-  resetPassword: authenticatedMiddleware(resetPassword),
+  resetPassword,
   deleteUser: authenticatedMiddleware(deleteUser)
 };
 
