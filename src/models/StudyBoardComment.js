@@ -1,5 +1,8 @@
 export default (sequelize, DataTypes) => {
   return sequelize.define("StudyBoardComment", {
-    comment: DataTypes.STRING
+    comment: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   });
 };
