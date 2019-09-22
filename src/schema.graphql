@@ -24,6 +24,6 @@ type Mutation {
   resetPassword(email: String!): Success
   deleteUser: Success
   createStudyBoard(params: StudyBoardInput): StudyBoard
-  deleteStudyBoard(id: Int!): GetStudyBoards
+  deleteStudyBoard(id: Int!): Success
   updateStudyBoard(params: StudyBoardInput): StudyBoard
 }

@@ -3,5 +3,5 @@ input StudyBoardInput {
   title: String!
   content: String!
   category: StudyBoardCategory!
-  StudyId: Int!
+  StudyId: Int
 }

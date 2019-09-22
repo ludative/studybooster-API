@@ -1,4 +1,4 @@
-type StudyBoard implements IStudyBoard {
+type StudyBoard implements IStudyBoard & IDate {
   id: ID
   title: String!
   content: String!

@@ -1,4 +1,5 @@
 import models from "../../models";
+import { authenticatedMiddleware } from "../../utils/middleware";
 
 // 게시판 글 생성
 const createStudyBoard = async (_, { params }, context) => {
@@ -15,14 +16,9 @@ const deleteStudyBoard = async (_, { id }, context) => {
   if (!user.isAdmin && studyBoard.UserId !== user.id)
     throw new Error("본인의 게시물만 삭제할 수 있습니다.");
 
-  await models.StudyBoard.destroy({
-    where: { id }
-  });
+  await studyBoard.destroy();
 
-  // 삭제 후 목록 리턴
-  const studyBoards = await models.StudyBoard.findAndCountAll();
-
-  return studyBoards;
+  return { isSuccess: true };
 };
 
 // 게시판 글 수정
@@ -39,9 +35,9 @@ const updateStudyBoard = async (_, { params }, context) => {
 };
 
 const studyBoardMutations = {
-  createStudyBoard,
-  deleteStudyBoard,
-  updateStudyBoard
+  createStudyBoard: authenticatedMiddleware(createStudyBoard),
+  deleteStudyBoard: authenticatedMiddleware(deleteStudyBoard),
+  updateStudyBoard: authenticatedMiddleware(updateStudyBoard)
 };
 
 export default studyBoardMutations;
