@@ -2,6 +2,7 @@
 # import * from "./schema/inputs/index.graphql"
 # import * from "./schema/users.graphql"
 # import * from "./schema/studies.graphql"
+# import * from "./schema/common.graphql"
 
 type Query {
   getUsers: GetUsers
@@ -13,4 +14,8 @@ type Mutation {
   signIn(email: String!, password: String!): UserWithToken
   updateUser(params: UserInput): User!
   createStudy(params: StudyInput): Study
+  sendMailValidation: Success
+  updatePassword(password: String!, newPassword: String!): User!
+  resetPassword(email: String!): Success
+  deleteUser: Success
 }
