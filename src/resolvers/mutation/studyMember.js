@@ -1,5 +1,5 @@
 import models from "../../models";
-import { authenticatedMiddleware } from "../../utils/middleware";
+import {authenticatedMiddleware, authenticatedStudyAdminMiddleware} from "../../utils/middleware";
 
 const createMember = async (_, {studyId}, {user}) => {
     const [member, created] = await models.StudyMember.findOrCreate({
@@ -15,16 +15,7 @@ const createMember = async (_, {studyId}, {user}) => {
     return member;
 };
 
-const updateMember = async (_, {params, studyId}, {user}) => {
-    const isStudyAdmin = await models.Study.findOne({
-        where: {
-            UserId: user.id,
-            id: studyId
-        }
-    });
-
-    if (!isStudyAdmin) throw new Error('스터디를 생성한 관리자만 수정가능합니다.');
-
+const updateMember = async (_, {params}) => {
     const members = await Promise.all(params.map(async param => {
         const member = await models.StudyMember.findByPk(param.id);
         return member.update(param)
@@ -48,7 +39,7 @@ const deleteMember = async (_, {studyId}, {user}) => {
 
 const studyMemberMutations = {
     createMember: authenticatedMiddleware(createMember),
-    updateMember: authenticatedMiddleware(updateMember),
+    updateMember: authenticatedStudyAdminMiddleware(updateMember),
     deleteMember: authenticatedMiddleware(deleteMember)
 };
 
