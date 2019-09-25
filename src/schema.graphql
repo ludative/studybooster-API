@@ -3,6 +3,9 @@
 # import * from "./schema/users.graphql"
 # import * from "./schema/studies.graphql"
 
+scalar Email
+scalar Password
+
 type Query {
   getUsers: GetUsers
   getUserById(id: Int!): User

@@ -1,9 +1,9 @@
 interface IUser {
-    id: ID
-    email: String
-    nickname: String
-    introduction: String
-    profileImage: String
-    deleted: Boolean
-    isAdmin: Boolean
+  id: ID
+  email: Email!
+  nickname: String
+  introduction: String
+  profileImage: String
+  deleted: Boolean
+  isAdmin: Boolean
 }
