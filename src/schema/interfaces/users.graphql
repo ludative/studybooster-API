@@ -6,4 +6,5 @@ interface IUser {
   profileImage: String
   deleted: Boolean
   isAdmin: Boolean
+  isValidEmail: Boolean
 }
