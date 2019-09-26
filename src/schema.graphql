@@ -5,6 +5,7 @@
 # import * from "./schema/studies.graphql"
 # import * from "./schema/common.graphql"
 # import * from "./schema/studyBoard.graphql"
+# import * from "./schema/studyMember.graphql"
 
 type Query {
   getUsers: GetUsers
@@ -12,6 +13,7 @@ type Query {
   getStudyBoards: GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
   getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
+  getStudyMembers(paginationParams: PaginationInput, params: GetStudyMemberInput, studyId: Int!): GetStudyMember
 }
 
 type Mutation {
@@ -26,4 +28,7 @@ type Mutation {
   createStudyBoard(params: StudyBoardInput): StudyBoard
   deleteStudyBoard(id: Int!): Success
   updateStudyBoard(params: StudyBoardInput): StudyBoard
+  createMember(studyId: Int!): StudyMember
+  updateMember(params: [StudyMemberInput], studyId: Int!): [StudyMember]
+  deleteMember(studyId: Int!): Success
 }
