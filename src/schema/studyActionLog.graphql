@@ -1,0 +1,10 @@
+type StudyActionLog implements IStudyActionLog & IDate {
+    id: ID
+    status: StudyActionLogEnum
+    UserId: Int
+    StudyId: Int
+    createdAt: String
+    updatedAt: String
+    User: User
+    Study: Study
+}
