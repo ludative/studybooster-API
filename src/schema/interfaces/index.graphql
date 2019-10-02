@@ -3,3 +3,4 @@
 # import * from "./studies.graphql"
 # import * from "./studyBoard.graphql"
 # import * from "./studyMember.graphql"
+# import * from "./studyActionLog.graphql"
