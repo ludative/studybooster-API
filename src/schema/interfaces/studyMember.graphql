@@ -1,0 +1,10 @@
+interface IStudyMember {
+    id: ID
+    isApprove: Boolean
+    isReject: Boolean
+    rejectReason: String
+    isBanish: Boolean
+    banishReason: String
+    UserId: Int
+    StudyId: Int
+}

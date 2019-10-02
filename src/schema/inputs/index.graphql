@@ -1,4 +1,6 @@
+# import * from "./common.graphql"
 # import * from "./users.graphql"
 # import * from "./studies.graphql"
 # import * from "./studyBoard.graphql"
 # import * from "./studyBoardComment.graphql
+# import * from "./studyMember.graphql"

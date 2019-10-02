@@ -1,0 +1,6 @@
+interface IStudyActionLog {
+    id: ID
+    status: StudyActionLogEnum
+    UserId: Int
+    StudyId: Int
+}

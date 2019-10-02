@@ -1,0 +1,18 @@
+type StudyMember implements IStudyMember & IDate {
+    id: ID
+    isApprove: Boolean
+    isReject: Boolean
+    rejectReason: String
+    isBanish: Boolean
+    banishReason: String
+    UserId: Int
+    StudyId: Int
+    createdAt: String
+    updatedAt: String
+    User: User
+}
+
+type GetStudyMember implements IPagination {
+    count: Int!
+    rows: [StudyMember]
+}
