@@ -5,6 +5,7 @@
 # import * from "./schema/studies.graphql"
 # import * from "./schema/common.graphql"
 # import * from "./schema/studyBoard.graphql"
+# import * from "./schema/studyBoardComment.graphql"
 
 type Query {
   getUsers: GetUsers
@@ -26,4 +27,8 @@ type Mutation {
   createStudyBoard(params: StudyBoardInput): StudyBoard
   deleteStudyBoard(id: Int!): Success
   updateStudyBoard(params: StudyBoardInput): StudyBoard
+  createStudyBoardComment(
+    comment: String!
+    StudyBoardId: Int!
+  ): StudyBoardComment
 }
