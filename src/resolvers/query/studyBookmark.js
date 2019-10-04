@@ -28,6 +28,7 @@ const getIsStudyBookmark = async (_,{studyId: StudyId}, context) => {
 
 const getStudyBookmarks = async (_, {paginationParams}, {user: {id: UserId}}) => {
     const bookmarks = await models.StudyBookmark.findAndCountAll({
+        where: { UserId },
         order: [['createdAt', 'DESC']],
         ...calculatePagination({...paginationParams}),
         include: {model: models.Study}
