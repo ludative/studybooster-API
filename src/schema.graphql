@@ -40,6 +40,7 @@ type Mutation {
     StudyBoardId: Int!
   ): StudyBoardComment
   deleteStudyBoardComment(id: Int!): Success
+  updateStudyBoardComment(id: Int!, comment: String!): StudyBoardComment
   createMember(studyId: Int!): StudyMember
   updateMember(params: [StudyMemberInput], studyId: Int!): [StudyMember]
   deleteMember(studyId: Int!): Success
