@@ -4,12 +4,12 @@ import { authenticatedMiddleware } from "../../utils/middleware";
 // 게시판 댓글 생성
 const createStudyBoardComment = async (
   _,
-  { comment, StudyBoardId },
+  { comment, studyBoardId },
   context
 ) => {
   const params = {
     comment,
-    StudyBoardId,
+    StudyBoardId: studyBoardId,
     UserId: context.user.id
   };
 

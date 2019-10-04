@@ -15,6 +15,7 @@ type Query {
   getStudyBoards: GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
   getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
+  getStudyBoardComments(studyBoardId: Int!): [StudyBoardComment]
   getStudyMembers(
     paginationParams: PaginationInput
     params: GetStudyMemberInput
@@ -37,7 +38,7 @@ type Mutation {
   updateStudyBoard(params: StudyBoardInput): StudyBoard
   createStudyBoardComment(
     comment: String!
-    StudyBoardId: Int!
+    studyBoardId: Int!
   ): StudyBoardComment
   deleteStudyBoardComment(id: Int!): Success
   updateStudyBoardComment(id: Int!, comment: String!): StudyBoardComment
