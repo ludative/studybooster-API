@@ -41,6 +41,7 @@ db.Sequelize = Sequelize;
 
 db.User.hasMany(db.Study);
 db.User.hasMany(db.StudyBoard);
+db.User.hasMany(db.StudyBoardComment);
 db.User.hasMany(db.StudyMember);
 db.User.hasMany(db.StudyActionLog);
 
@@ -57,6 +58,10 @@ db.StudySubject.hasMany(db.Study);
 
 db.StudyBoard.belongsTo(db.User);
 db.StudyBoard.belongsTo(db.Study);
+db.StudyBoard.hasMany(db.StudyBoardComment);
+
+db.StudyBoardComment.belongsTo(db.StudyBoard);
+db.StudyBoardComment.belongsTo(db.User);
 
 db.StudyMember.belongsTo(db.User);
 db.StudyMember.belongsTo(db.Study);

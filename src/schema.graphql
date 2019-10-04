@@ -5,6 +5,7 @@
 # import * from "./schema/studies.graphql"
 # import * from "./schema/common.graphql"
 # import * from "./schema/studyBoard.graphql"
+# import * from "./schema/studyBoardComment.graphql"
 # import * from "./schema/studyMember.graphql"
 # import * from "./schema/studyActionLog.graphql"
 
@@ -14,7 +15,12 @@ type Query {
   getStudyBoards: GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
   getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
-  getStudyMembers(paginationParams: PaginationInput, params: GetStudyMemberInput, studyId: Int!): GetStudyMember
+  getStudyBoardComments(studyBoardId: Int!): [StudyBoardComment]
+  getStudyMembers(
+    paginationParams: PaginationInput
+    params: GetStudyMemberInput
+    studyId: Int!
+  ): GetStudyMember
   getStudyActionLogs: [StudyActionLog]
 }
 
@@ -30,6 +36,12 @@ type Mutation {
   createStudyBoard(params: StudyBoardInput): StudyBoard
   deleteStudyBoard(id: Int!): Success
   updateStudyBoard(params: StudyBoardInput): StudyBoard
+  createStudyBoardComment(
+    comment: String!
+    studyBoardId: Int!
+  ): StudyBoardComment
+  deleteStudyBoardComment(id: Int!): Success
+  updateStudyBoardComment(id: Int!, comment: String!): StudyBoardComment
   createMember(studyId: Int!): StudyMember
   updateMember(params: [StudyMemberInput], studyId: Int!): [StudyMember]
   deleteMember(studyId: Int!): Success
