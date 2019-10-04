@@ -29,3 +29,8 @@ type StudyDays implements IStudyDays{
     id: ID
     day: Int
 }
+
+type GetStudy implements IPagination {
+    count: Int!
+    rows: [Study]
+}
