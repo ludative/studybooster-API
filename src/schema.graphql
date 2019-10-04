@@ -12,9 +12,12 @@
 type Query {
   getUsers: GetUsers
   getUserById(id: Int!): User
-  getStudyBoards: GetStudyBoards
+  getStudyBoards(
+    paginationParams: PaginationInput
+    studyId: Int!
+    category: StudyBoardCategory
+  ): GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
-  getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
   getStudyBoardComments(studyBoardId: Int!): [StudyBoardComment]
   getStudyMembers(
     paginationParams: PaginationInput
