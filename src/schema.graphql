@@ -13,6 +13,7 @@
 type Query {
   getUsers: GetUsers
   getUserById(id: Int!): User
+  getStudies(paginationParams: PaginationInput)
   getStudyBoards: GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
   getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
