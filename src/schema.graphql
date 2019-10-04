@@ -37,7 +37,7 @@ type Mutation {
   resetPassword(email: String!): Success
   deleteUser: Success
   createStudyBoard(params: StudyBoardInput): StudyBoard
-  deleteStudyBoard(id: Int!): Success
+  deleteStudyBoard(id: Int!, studyId: Int!): Success
   updateStudyBoard(params: StudyBoardInput): StudyBoard
   createStudyBoardComment(
     comment: String!

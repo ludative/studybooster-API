@@ -10,10 +10,19 @@ const createStudyBoard = async (_, { params }, context) => {
 };
 
 // 게시판 글 삭제
-const deleteStudyBoard = async (_, { id }, context) => {
+const deleteStudyBoard = async (_, { id, studyId }, context) => {
   const user = context.user;
-  const studyBoard = await models.StudyBoard.findByPk(id);
-  if (!user.isAdmin && studyBoard.UserId !== user.id)
+  const isStudyAdmin = await models.Study.findOne({
+    where: {
+      UserId: user.id,
+      id: studyId
+    }
+  });
+
+  const studyBoard = await models.StudyBoard.findOne({
+    where: { id, UserId: user.id }
+  });
+  if (!isStudyAdmin || !studyBoard)
     throw new Error("본인의 게시물만 삭제할 수 있습니다.");
 
   await studyBoard.destroy();
