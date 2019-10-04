@@ -5,3 +5,4 @@
 # import * from "./studyBoardComment.graphql"
 # import * from "./studyMember.graphql"
 # import * from "./studyActionLog.graphql"
+# import * from "./studyBookmark.graphql"

@@ -8,6 +8,7 @@
 # import * from "./schema/studyBoardComment.graphql"
 # import * from "./schema/studyMember.graphql"
 # import * from "./schema/studyActionLog.graphql"
+# import * from "./schema/studyBookmark.graphql"
 
 type Query {
   getUsers: GetUsers
@@ -22,6 +23,8 @@ type Query {
     studyId: Int!
   ): GetStudyMember
   getStudyActionLogs: [StudyActionLog]
+  getIsStudyBookmark(studyId: Int!): StudyBookmark
+  getStudyBookmarks(paginationParams: PaginationInput): GetStudy
 }
 
 type Mutation {
@@ -46,4 +49,5 @@ type Mutation {
   updateMember(params: [StudyMemberInput], studyId: Int!): [StudyMember]
   deleteMember(studyId: Int!): Success
   createStudyActionLog(status: StudyActionLogEnum!, studyId: Int!): Success
+  toggleStudyBookmark(studyId: Int!): StudyBookmark
 }
