@@ -19,13 +19,25 @@ const deleteStudyBoard = async (_, { id, studyId }, context) => {
     }
   });
 
+  const promises = [];
+
+  const studyBoardComments = await models.StudyBoardComment.findAll({
+    where: {
+      StudyBoardId: id
+    }
+  });
+
+  studyBoardComments.forEach(studyBoardComment => {
+    promises.push(studyBoardComment.destroy());
+  });
+
   const studyBoard = await models.StudyBoard.findOne({
     where: { id, UserId: user.id }
   });
   if (!isStudyAdmin || !studyBoard)
     throw new Error("본인의 게시물만 삭제할 수 있습니다.");
 
-  await studyBoard.destroy();
+  await Promise.all([...promises, studyBoard.destroy()]);
 
   return { isSuccess: true };
 };
