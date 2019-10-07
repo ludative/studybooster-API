@@ -7,7 +7,9 @@ const getStudyBoards = async (
   _,
   { paginationParams, studyId: StudyId, category }
 ) => {
-  const where = {};
+  const where = {
+    StudyId
+  };
 
   if (category) {
     where.category = category;
@@ -15,7 +17,6 @@ const getStudyBoards = async (
 
   const studyBoards = await models.StudyBoard.findAndCountAll({
     where,
-    StudyId,
     ...calculatePagination({ ...paginationParams })
   });
 

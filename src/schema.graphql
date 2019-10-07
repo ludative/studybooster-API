@@ -18,7 +18,10 @@ type Query {
     category: StudyBoardCategory
   ): GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
-  getStudyBoardComments(studyBoardId: Int!): [StudyBoardComment]
+  getStudyBoardComments(
+    paginationParams: PaginationInput
+    studyBoardId: Int!
+  ): GetStudyBoardComments
   getStudyMembers(
     paginationParams: PaginationInput
     params: GetStudyMemberInput
