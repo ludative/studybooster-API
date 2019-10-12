@@ -42,6 +42,9 @@ const deleteStudy = async (_, { id }, context) => {
       studyBoards.map(board =>
         models.StudyBoard.destroy({ where: { id: board.id } })
       ),
+      studyBoards.map(board =>
+        models.StudyBoardComment.destroy({ where: { StudyBoardId: board.id } })
+      ),
       studyMembers.map(member =>
         models.StudyMember.destroy({ where: { id: member.id } })
       ),
