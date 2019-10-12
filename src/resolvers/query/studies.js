@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
 import models from "../../models";
 import calculatePagination from "../../utils/calculatePagination";
+import { authenticatedMiddleware } from "../../utils/middleware";
 
 // 스터디 리스트
 const getStudies = async (_, { paginationParams, params }) => {
