@@ -1,36 +1,36 @@
 type Study implements IStudy & IDate {
-    id: ID
-    name: String
-    description: String
-    startDate: Float
-    endDate: Float
-    startTime: Int
-    endTime: Int
-    weekPeriod: Int
-    location: String
-    customSubject: String
-    thumbnail: String
-    limitedMemberCount: Int
-    isPrivate: Boolean
-    UserId: Int
-    StudySubjectId: Int
-    StudySubjects: [StudySubject]
-    StudyDays: [StudyDays]
-    createdAt: String
-    updatedAt: String
+  id: ID
+  name: String
+  description: String
+  startDate: Float
+  endDate: Float
+  startTime: Int
+  endTime: Int
+  weekPeriod: Int
+  location: String
+  customSubject: String
+  thumbnail: String
+  limitedMemberCount: Int
+  isPrivate: Boolean
+  UserId: Int
+  StudySubjectId: Int
+  StudySubjects: [StudySubject]
+  StudyDays: [StudyDays]
+  createdAt: String
+  updatedAt: String
 }
 
-type StudySubject implements IStudySubject{
-    id: ID
-    title: String
+type StudySubject implements IStudySubject {
+  id: ID
+  title: String
 }
 
-type StudyDays implements IStudyDays{
-    id: ID
-    day: Int
+type StudyDays implements IStudyDays {
+  id: ID
+  day: Int
 }
 
 type GetStudy implements IPagination {
-    count: Int!
-    rows: [Study]
+  count: Int!
+  rows: [Study]
 }
