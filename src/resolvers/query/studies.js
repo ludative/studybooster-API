@@ -4,7 +4,8 @@ import calculatePagination from "../../utils/calculatePagination";
 import { authenticatedMiddleware } from "../../utils/middleware";
 
 // 스터디 리스트
-const getStudies = async (_, { paginationParams, params }) => {
+const getStudies = async (_, { paginationParams, params, isMine }, context) => {
+  const user = context.user;
   const {
     name,
     description,
@@ -46,6 +47,7 @@ const getStudies = async (_, { paginationParams, params }) => {
    * weekPeriod,
    */
   if (typeof UserId === "integer") where.UserId = UserId;
+  // if (isMine && user) where.UserId = user.id;
   if (typeof weekPeriod === "integer") where.weekPeriod = weekPeriod;
 
   /**
@@ -68,12 +70,23 @@ const getStudies = async (_, { paginationParams, params }) => {
 
   if (typeof isPrivate === "boolean") where.isPrivate = isPrivate;
 
-  const studies = await models.Study.findAndCountAll({
-    where,
-    order,
-    ...calculatePagination({ ...paginationParams }),
-    include: [models.StudyDay, models.StudyMember]
-  });
+  const studies =
+    user && isMine
+      ? await models.Study.findAndCountAll({
+          where,
+          order,
+          ...calculatePagination({ ...paginationParams }),
+          include: [
+            models.StudyDay,
+            { model: models.StudyMember, where: { UserId: user.id } }
+          ]
+        })
+      : await models.Study.findAndCountAll({
+          where,
+          order,
+          ...calculatePagination({ ...paginationParams }),
+          include: [models.StudyDay]
+        });
 
   return studies;
 };
