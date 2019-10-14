@@ -34,6 +34,7 @@ type Mutation {
   signIn(email: String!, password: String!): UserWithToken
   updateUser(params: UserInput): User!
   createStudy(params: StudyInput): Study
+  updateStudy(params: StudyInput): Study
   deleteStudy(id: Int!): Success
   sendMailValidation: Success
   updatePassword(password: String!, newPassword: String!): User!

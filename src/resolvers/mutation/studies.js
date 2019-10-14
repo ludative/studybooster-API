@@ -8,11 +8,32 @@ const createStudy = async (_, { params }) => {
   return study;
 };
 
+const updateStudy = async (_, { params }, context) => {
+  const user = context.user;
+  const { StudyDays } = params;
+  const study = await models.Study.findByPk(params.id);
+
+  if (!study) throw new Error("존재하지 않는 스터디입니다.");
+  if (study.UserId !== user.id)
+    throw new Error("스터디 관리자만 스터디 수정이 가능합니다.");
+  if (StudyDays) {
+    await Promise.all(
+      StudyDays.map(studyDay =>
+        models.StudyDay.update({ ...studyDay }, { where: { id: studyDay.id } })
+      )
+    );
+  }
+  await study.update({ ...params });
+
+  return study;
+};
+
 const deleteStudy = async (_, { id }, context) => {
   try {
     const user = context.user;
     const study = await models.Study.findByPk(id);
 
+    if (!study) throw new Error("존재하지 않는 스터디입니다.");
     if (study.UserId !== user.id)
       throw new Error("스터디 관리자만 스터디 삭제가 가능합니다.");
 
@@ -65,7 +86,8 @@ const deleteStudy = async (_, { id }, context) => {
 };
 
 const studyMutations = {
-  createStudy,
+  createStudy: authenticatedMiddleware(createStudy),
+  updateStudy: authenticatedMiddleware(updateStudy),
   deleteStudy: authenticatedMiddleware(deleteStudy)
 };
 
