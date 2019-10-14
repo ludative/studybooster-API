@@ -16,6 +16,7 @@ type Study implements IStudy & IDate {
   StudySubjectId: Int
   StudySubjects: [StudySubject]
   StudyDays: [StudyDays]
+  StudyMembers: [StudyMember]
   createdAt: String
   updatedAt: String
 }
@@ -28,6 +29,17 @@ type StudySubject implements IStudySubject {
 type StudyDays implements IStudyDays {
   id: ID
   day: Int
+}
+
+type StudyMember implements IStudyMember {
+  id: ID
+  isApprove: Boolean
+  isReject: Boolean
+  rejectReason: String
+  isBanish: Boolean
+  banishReason: String
+  UserId: Int
+  StudyId: Int
 }
 
 type GetStudy implements IPagination {

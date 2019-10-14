@@ -71,7 +71,8 @@ const getStudies = async (_, { paginationParams, params }) => {
   const studies = await models.Study.findAndCountAll({
     where,
     order,
-    ...calculatePagination({ ...paginationParams })
+    ...calculatePagination({ ...paginationParams }),
+    include: [models.StudyDay, models.StudyMember]
   });
 
   return studies;
@@ -79,7 +80,7 @@ const getStudies = async (_, { paginationParams, params }) => {
 
 // 스터디 상세
 const getStudyById = async (_, { id }) => {
-  const study = await models.Study.findByPk(id);
+  const study = await models.Study.findByPk(id, { include: [models.StudyDay] });
 
   return study;
 };
