@@ -1,5 +1,5 @@
 import models from "../../models";
-import { authenticatedMiddleware } from "../../utils/middleware";
+import { authenticatedMiddleware, authenticatedStudyMemberMiddleware } from "../../utils/middleware";
 
 // 게시판 글 생성
 const createStudyBoard = async (_, { params }, context) => {
@@ -10,15 +10,8 @@ const createStudyBoard = async (_, { params }, context) => {
 };
 
 // 게시판 글 삭제
-const deleteStudyBoard = async (_, { id, studyId }, context) => {
+const deleteStudyBoard = async (_, { id }, context) => {
   const user = context.user;
-  const isStudyAdmin = await models.Study.findOne({
-    where: {
-      UserId: user.id,
-      id: studyId
-    }
-  });
-
   const promises = [];
 
   const studyBoardComments = await models.StudyBoardComment.findAll({
@@ -34,7 +27,7 @@ const deleteStudyBoard = async (_, { id, studyId }, context) => {
   const studyBoard = await models.StudyBoard.findOne({
     where: { id, UserId: user.id }
   });
-  if (!isStudyAdmin || !studyBoard)
+  if (!studyBoard)
     throw new Error("본인의 게시물만 삭제할 수 있습니다.");
 
   await Promise.all([...promises, studyBoard.destroy()]);
@@ -57,8 +50,8 @@ const updateStudyBoard = async (_, { params }, context) => {
 
 const studyBoardMutations = {
   createStudyBoard: authenticatedMiddleware(createStudyBoard),
-  deleteStudyBoard: authenticatedMiddleware(deleteStudyBoard),
-  updateStudyBoard: authenticatedMiddleware(updateStudyBoard)
+  deleteStudyBoard: authenticatedStudyMemberMiddleware(deleteStudyBoard),
+  updateStudyBoard: authenticatedStudyMemberMiddleware(updateStudyBoard)
 };
 
 export default studyBoardMutations;

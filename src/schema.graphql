@@ -44,7 +44,7 @@ type Mutation {
   deleteUser: Success
   createStudyBoard(params: StudyBoardInput): StudyBoard
   deleteStudyBoard(id: Int!, studyId: Int!): Success
-  updateStudyBoard(params: StudyBoardInput): StudyBoard
+  updateStudyBoard(params: StudyBoardInput, studyId: Int!): StudyBoard
   createStudyBoardComment(
     comment: String!
     studyBoardId: Int!
