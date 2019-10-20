@@ -7,6 +7,7 @@ const createStudy = async (_, {params}) => {
     return study;
 };
 
+
 const studyMutations = {
     createStudy
 };

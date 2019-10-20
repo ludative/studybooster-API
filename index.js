@@ -30,7 +30,7 @@ const server = new ApolloServer({
       if (!user.id) throw new Error("잘못된 접근입니다.");
       const _user = await models.User.findByPk(user.id);
       if (!_user) throw new Error("존재하지 않는 회원입니다.");
-      return { user: _user, token };
+      return { user: _user, token, ...user };
     }
   }
 });
