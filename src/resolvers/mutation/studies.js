@@ -11,14 +11,29 @@ const createStudy = async (_, { params }) => {
   return study;
 };
 
-const updateStudy = async (_, { params }, { study }) => {
+const updateStudy = async (_, { params, studyId: StudyId }, { study }) => {
   const { StudyDays } = params;
   // abled / deleted status 값 넘겨서 데이터 처리하기
   if (StudyDays) {
     await Promise.all(
-      StudyDays.map(studyDay =>
-        models.StudyDay.update({ ...studyDay }, { where: { id: studyDay.id } })
-      )
+      StudyDays.map(studyDay => {
+        if (studyDay.id) {
+          /**
+           * update / delete
+           */
+          return studyDay.isDeleted
+            ? models.StudyDay.destroy({ where: { id: studyDay.id } })
+            : models.StudyDay.update(
+                { ...studyDay },
+                { where: { id: studyDay.id } }
+              );
+        } else {
+          /**
+           * create
+           */
+          return models.StudyDay.create({ ...studyDay, StudyId: StudyId });
+        }
+      })
     );
   }
   await study.update({ ...params });
