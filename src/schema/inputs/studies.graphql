@@ -30,6 +30,7 @@ input GetStudyInput {
   limitedMemberCount: Int
   isPrivate: Boolean
   UserId: Int
+  StudyDays: [StudyDayInput]
   orderBy: String
   orderDirection: String
 }

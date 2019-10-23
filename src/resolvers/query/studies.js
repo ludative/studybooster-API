@@ -24,16 +24,20 @@ const getStudies = async (
     maxLimitedMemberCount,
     isPrivate,
     UserId,
+    StudyDays,
     orderBy = "createdAt",
     orderDirection = "DESC"
   } = params;
 
   const where = {};
+  const whereDays = {};
   const order = [[orderBy, orderDirection]];
   /**
    *
    * StudyDays: 0-6 검색 되도록
    */
+  if (StudyDays && StudyDays.length)
+    whereDays.id = StudyDays.map(day => day.id);
 
   /**
    * like 검새기 가능한 컬럼
@@ -82,7 +86,7 @@ const getStudies = async (
           order,
           ...calculatePagination({ ...paginationParams }),
           include: [
-            models.StudyDay,
+            { model: models.StudyDay, where: whereDays },
             { model: models.StudyMember, where: { UserId: user.id } }
           ]
         })
@@ -90,7 +94,7 @@ const getStudies = async (
           where,
           order,
           ...calculatePagination({ ...paginationParams }),
-          include: [models.StudyDay]
+          include: [{ model: models.StudyDay, where: whereDays }]
         });
 
   return studies;
