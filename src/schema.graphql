@@ -9,6 +9,7 @@
 # import * from "./schema/studyMember.graphql"
 # import * from "./schema/studyActionLog.graphql"
 # import * from "./schema/studyBookmark.graphql"
+# import * from "./schema/studyAttend.graphql"
 
 type Query {
   getUsers: GetUsers
@@ -25,6 +26,8 @@ type Query {
   getStudyActionLogs: [StudyActionLog]
   getIsStudyBookmark(studyId: Int!): StudyBookmark
   getStudyBookmarks(paginationParams: PaginationInput): GetStudy
+  getStudyAttends(paginationParams: PaginationInput): GetStudyAttend
+  getStudyAttendById(id: Int!): StudyAttend
 }
 
 type Mutation {
@@ -50,4 +53,6 @@ type Mutation {
   deleteMember(studyId: Int!): Success
   createStudyActionLog(status: StudyActionLogEnum!, studyId: Int!): Success
   toggleStudyBookmark(studyId: Int!): StudyBookmark
+  createStudyAttend(params: StudyAttendInput!): StudyAttend
+  updateStudyAttend(params: StudyAttendInput!, studyId: Int!): StudyAttend
 }
