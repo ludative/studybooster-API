@@ -13,10 +13,16 @@
 type Query {
   getUsers: GetUsers
   getUserById(id: Int!): User
-  getStudyBoards: GetStudyBoards
+  getStudyBoards(
+    paginationParams: PaginationInput
+    studyId: Int!
+    category: StudyBoardCategory
+  ): GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
-  getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
-  getStudyBoardComments(studyBoardId: Int!): [StudyBoardComment]
+  getStudyBoardComments(
+    paginationParams: PaginationInput
+    studyBoardId: Int!
+  ): GetStudyBoardComments
   getStudyMembers(
     paginationParams: PaginationInput
     params: GetStudyMemberInput
@@ -37,8 +43,8 @@ type Mutation {
   resetPassword(email: String!): Success
   deleteUser: Success
   createStudyBoard(params: StudyBoardInput): StudyBoard
-  deleteStudyBoard(id: Int!): Success
-  updateStudyBoard(params: StudyBoardInput): StudyBoard
+  deleteStudyBoard(id: Int!, studyId: Int!): Success
+  updateStudyBoard(params: StudyBoardInput, studyId: Int!): StudyBoard
   createStudyBoardComment(
     comment: String!
     studyBoardId: Int!
