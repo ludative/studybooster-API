@@ -14,26 +14,10 @@ const createStudy = async (_, { params }) => {
 const updateStudy = async (_, { params, studyId: StudyId }, { study }) => {
   const { StudyDays } = params;
   // abled / deleted status 값 넘겨서 데이터 처리하기
-  if (StudyDays) {
+  if (StudyDays && StudyDays.length) {
+    await models.StudyDay.destroy({ where: { StudyId } });
     await Promise.all(
-      StudyDays.map(studyDay => {
-        if (studyDay.id) {
-          /**
-           * update / delete
-           */
-          return studyDay.isDeleted
-            ? models.StudyDay.destroy({ where: { id: studyDay.id } })
-            : models.StudyDay.update(
-                { ...studyDay },
-                { where: { id: studyDay.id } }
-              );
-        } else {
-          /**
-           * create
-           */
-          return models.StudyDay.create({ ...studyDay, StudyId: StudyId });
-        }
-      })
+      StudyDays.map(day => models.StudyDay.create({ day, StudyId }))
     );
   }
   await study.update({ ...params });
@@ -78,7 +62,6 @@ const deleteStudy = async (_, { studyId: StudyId }, { study }) => {
 
   return { isSuccess: true };
 };
-
 
 const studyMutations = {
   createStudy: authenticatedMiddleware(createStudy),
