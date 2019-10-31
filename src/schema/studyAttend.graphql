@@ -1,0 +1,11 @@
+type StudyAttend implements IStudyAttend {
+  confirmed: Boolean
+  confirmedDate: Float
+  UserId: Int!
+  StudyId: Int!
+}
+
+type GetStudyAttend implements IPagination {
+  count: Int!
+  rows: [StudyAttend]
+}

@@ -45,12 +45,14 @@ db.User.hasMany(db.StudyBoardComment);
 db.User.hasMany(db.StudyMember);
 db.User.hasMany(db.StudyActionLog);
 db.User.hasMany(db.StudyBookmark);
+db.User.hasMany(db.StudyAttend);
 
 db.Study.hasMany(db.StudyDay);
 db.Study.hasMany(db.StudyBoard);
 db.Study.hasMany(db.StudyMember);
 db.Study.hasMany(db.StudyActionLog);
 db.Study.hasMany(db.StudyBookmark);
+db.Study.hasMany(db.StudyAttend);
 db.Study.belongsTo(db.User);
 db.Study.belongsTo(db.StudySubject);
 
@@ -73,5 +75,8 @@ db.StudyActionLog.belongsTo(db.Study);
 
 db.StudyBookmark.belongsTo(db.User);
 db.StudyBookmark.belongsTo(db.Study);
+
+db.StudyAttend.belongsTo(db.User);
+db.StudyAttend.belongsTo(db.Study);
 
 export default db;
