@@ -79,6 +79,7 @@ const deleteStudy = async (_, { studyId: StudyId }, { study }) => {
   return { isSuccess: true };
 };
 
+
 const studyMutations = {
   createStudy: authenticatedMiddleware(createStudy),
   updateStudy: authenticatedStudyAdminMiddleware(updateStudy),

@@ -42,7 +42,7 @@ export const authenticatedStudyMemberMiddleware = next => async (
   return next(root, args, context, info);
 };
 
-export const authenticatedStudyAdminMiddleware = next => async (
+export const authenticatedStudyAdminMiddleware = (next, errorMessage) => async (
   root,
   args,
   context,
@@ -51,14 +51,16 @@ export const authenticatedStudyAdminMiddleware = next => async (
   if (!context.user) {
     throw new Error("잘못된 접근입니다.");
   }
-  const study = await models.Study.findByPk(args.studyId);
 
-  if (!study) throw new Error("존재하지 않는 스터디입니다.");
+  const isStudyAdmin = await models.Study.findOne({
+    where: {
+      UserId: context.user.id,
+      id: args.studyId
+    }
+  });
 
-  if (context.user.id !== study.UserId)
-    throw new Error("스터디를 생성한 관리자만 수정가능합니다.");
-
-  context.study = study;
+  if (!isStudyAdmin)
+    throw new Error(errorMessage || "스터디를 생성한 관리자만 수정가능합니다.");
 
   return next(root, args, context, info);
 };

@@ -11,7 +11,7 @@
 # import * from "./schema/studyBookmark.graphql"
 
 type Query {
-  getUsers: GetUsers
+  getUsers(paginationParams: PaginationInput, searchingText: String): GetUsers
   getUserById(id: Int!): User
   getStudies(
     paginationParams: PaginationInput
@@ -19,10 +19,16 @@ type Query {
     isMine: Boolean!
   ): GetStudy
   getStudyById(id: Int!): Study
-  getStudyBoards: GetStudyBoards
+  getStudyBoards(
+    paginationParams: PaginationInput
+    studyId: Int!
+    category: StudyBoardCategory
+  ): GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
-  getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
-  getStudyBoardComments(studyBoardId: Int!): [StudyBoardComment]
+  getStudyBoardComments(
+    paginationParams: PaginationInput
+    studyBoardId: Int!
+  ): GetStudyBoardComments
   getStudyMembers(
     paginationParams: PaginationInput
     params: GetStudyMemberInput
@@ -45,8 +51,8 @@ type Mutation {
   resetPassword(email: String!): Success
   deleteUser: Success
   createStudyBoard(params: StudyBoardInput): StudyBoard
-  deleteStudyBoard(id: Int!): Success
-  updateStudyBoard(params: StudyBoardInput): StudyBoard
+  deleteStudyBoard(id: Int!, studyId: Int!): Success
+  updateStudyBoard(params: StudyBoardInput, studyId: Int!): StudyBoard
   createStudyBoardComment(
     comment: String!
     studyBoardId: Int!
@@ -54,8 +60,10 @@ type Mutation {
   deleteStudyBoardComment(id: Int!): Success
   updateStudyBoardComment(id: Int!, comment: String!): StudyBoardComment
   createMember(studyId: Int!): StudyMember
+  createMemberByInvite: StudyMember
   updateMember(params: [StudyMemberInput], studyId: Int!): [StudyMember]
   deleteMember(studyId: Int!): Success
   createStudyActionLog(status: StudyActionLogEnum!, studyId: Int!): Success
   toggleStudyBookmark(studyId: Int!): StudyBookmark
+  sendMailToInvitedUsers(userIds: [ID]!, studyId: Int!): Success
 }
