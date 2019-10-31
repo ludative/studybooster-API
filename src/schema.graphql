@@ -12,12 +12,24 @@
 # import * from "./schema/studyAttend.graphql"
 
 type Query {
-  getUsers: GetUsers
+  getUsers(paginationParams: PaginationInput, searchingText: String): GetUsers
   getUserById(id: Int!): User
-  getStudyBoards: GetStudyBoards
+  getStudies(
+    paginationParams: PaginationInput
+    params: GetStudyInput
+    isMine: Boolean!
+  ): GetStudy
+  getStudyById(id: Int!): Study
+  getStudyBoards(
+    paginationParams: PaginationInput
+    studyId: Int!
+    category: StudyBoardCategory
+  ): GetStudyBoards
   getStudyBoardById(id: Int!): StudyBoard
-  getStudyBoardsByCategory(category: StudyBoardCategory): GetStudyBoards
-  getStudyBoardComments(studyBoardId: Int!): [StudyBoardComment]
+  getStudyBoardComments(
+    paginationParams: PaginationInput
+    studyBoardId: Int!
+  ): GetStudyBoardComments
   getStudyMembers(
     paginationParams: PaginationInput
     params: GetStudyMemberInput
@@ -38,13 +50,15 @@ type Mutation {
   signIn(email: String!, password: String!): UserWithToken
   updateUser(params: UserInput): User!
   createStudy(params: StudyInput): Study
+  updateStudy(params: StudyInput, studyId: Int!): Study
+  deleteStudy(studyId: Int!): Success
   sendMailValidation: Success
   updatePassword(password: String!, newPassword: String!): User!
   resetPassword(email: String!): Success
   deleteUser: Success
   createStudyBoard(params: StudyBoardInput): StudyBoard
-  deleteStudyBoard(id: Int!): Success
-  updateStudyBoard(params: StudyBoardInput): StudyBoard
+  deleteStudyBoard(id: Int!, studyId: Int!): Success
+  updateStudyBoard(params: StudyBoardInput, studyId: Int!): StudyBoard
   createStudyBoardComment(
     comment: String!
     studyBoardId: Int!
@@ -52,6 +66,7 @@ type Mutation {
   deleteStudyBoardComment(id: Int!): Success
   updateStudyBoardComment(id: Int!, comment: String!): StudyBoardComment
   createMember(studyId: Int!): StudyMember
+  createMemberByInvite: StudyMember
   updateMember(params: [StudyMemberInput], studyId: Int!): [StudyMember]
   deleteMember(studyId: Int!): Success
   createStudyActionLog(status: StudyActionLogEnum!, studyId: Int!): Success
@@ -59,4 +74,5 @@ type Mutation {
   createStudyAttend(params: StudyAttendInput!): StudyAttend
   updateStudyAttendByAttendee(id: Int!, studyId: Int!): StudyAttend
   updateStudyAttendByAdmin(id: Int!, studyId: Int!): StudyAttend
+  sendMailToInvitedUsers(userIds: [ID]!, studyId: Int!): Success
 }

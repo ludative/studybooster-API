@@ -1,4 +1,5 @@
 import usersQuery from "./resolvers/query/users";
+import studyQuery from "./resolvers/query/studies";
 import studyBoardQuery from "./resolvers/query/studyBoard";
 import studyBoardCommentQuery from "./resolvers/query/studyBoardComment";
 import studyMemberQuery from "./resolvers/query/studyMember";
@@ -18,6 +19,7 @@ import studyAttendMutations from "./resolvers/mutation/studyAttend";
 const resolvers = {
   Query: {
     ...usersQuery,
+    ...studyQuery,
     ...studyBoardQuery,
     ...studyBoardCommentQuery,
     ...studyMemberQuery,

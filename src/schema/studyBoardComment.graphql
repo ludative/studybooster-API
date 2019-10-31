@@ -6,3 +6,8 @@ type StudyBoardComment implements IStudyBoardComment & IDate {
   createdAt: String
   updatedAt: String
 }
+
+type GetStudyBoardComments implements IPagination {
+  count: Int!
+  rows: [StudyBoardComment]
+}
