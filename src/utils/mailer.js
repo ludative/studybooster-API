@@ -43,3 +43,11 @@ export const getMailResetPassword = ({email, newPassword}) => {
         content: `<div>비밀번호가 재발급 되었습니다. 보안을 위해 비밀번호를 변경해주세요!</div><div>변경된 비밀번호: ${newPassword}</div>`
     };
 };
+
+export const getMailInviteStudy = ({email, studyTitle, token}) => {
+    return {
+        to: email,
+        subject: '스터디부스터 초대 메일',
+        content: `<div><b>${studyTitle}</b>에 당신을 초대합니다. 아래 링크로 접속하면 자동으로 신청 완료됩니다.</div><div>초대 응답하기: ${process.env.HOST_NAME}/invited/${token}</div>`
+    };
+};
