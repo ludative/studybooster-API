@@ -8,6 +8,10 @@ export default (sequelize, DataTypes) => {
     confirmedDate: {
       type: DataTypes.INTEGER(13),
       comment: "출석 승인날짜"
+    },
+    confirmedCount: {
+      type: DataTypes.INTEGER,
+      comment: "출석 승인횟수"
     }
   });
 };
