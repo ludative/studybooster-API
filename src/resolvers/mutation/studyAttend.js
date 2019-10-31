@@ -15,18 +15,20 @@ const createStudyAttend = async (_, { params }) => {
   });
 };
 
-const updateStudyAttendByAttendee = async (_, { params }) => {
-  const attend = await models.StudyAttend.findByPk(params.id);
-  return await attend.update({ ...params, confirmed: false });
+const updateStudyAttendByAttendee = async (_, { id, studyId: StudyId }) => {
+  return await updateStudyAttend(id, { confirmed: false });
 };
 
-const updateStudyAttendByAdmin = async (_, { params }) => {
-  const attend = await models.StudyAttend.findByPk(params.id);
-  return await attend.update({
-    ...params,
+const updateStudyAttendByAdmin = async (_, { id, studyId: StudyId }) => {
+  return await updateStudyAttend(id, {
     confirmed: true,
     confirmedDate: moment().valueOf()
   });
+};
+
+const updateStudyAttend = async (id, params) => {
+  const attend = await models.StudyAttend.findByPk(id);
+  return await attend.update({ ...params });
 };
 
 const studyAttendMutations = {
