@@ -1,0 +1,3 @@
+type StudyBookmark implements IStudyBookmark {
+    isBookmark: Boolean
+}

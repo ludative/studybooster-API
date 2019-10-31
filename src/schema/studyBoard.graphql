@@ -1,0 +1,15 @@
+type StudyBoard implements IStudyBoard & IDate {
+  id: ID
+  title: String!
+  content: String!
+  category: StudyBoardCategory!
+  UserId: Int!
+  StudyId: Int!
+  createdAt: String
+  updatedAt: String
+}
+
+type GetStudyBoards implements IPagination {
+  count: Int!
+  rows: [StudyBoard]
+}

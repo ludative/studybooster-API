@@ -1,0 +1,4 @@
+input StudyBoardCommentInput {
+  comment: String
+  StudyBoardId: Int
+}

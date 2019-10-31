@@ -1,17 +1,22 @@
-type User {
-    id: Int!
-    email: String!
-    password: String!
-    nickname: String,
-    introduction: String,
-    profileImage: String,
-    isAdmin: Boolean!
-    deleted: Boolean!
-    createdAt: String
-    updatedAt: String
+type User implements IUser {
+  id: ID!
+  email: String!
+  nickname: String
+  introduction: String
+  profileImage: String
+  isAdmin: Boolean!
+  deleted: Boolean!
+  isValidEmail: Boolean!
+  createdAt: String
+  updatedAt: String
+}
+
+type UserWithToken {
+  user: User
+  token: String!
 }
 
 type GetUsers implements IPagination {
-    count: Int!
-    rows: [User]
+  count: Int!
+  rows: [User]
 }

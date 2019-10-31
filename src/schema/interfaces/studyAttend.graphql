@@ -1,0 +1,6 @@
+interface IStudyAttend {
+  confirmed: Boolean
+  confirmedDate: Float
+  UserId: Int
+  StudyId: Int
+}

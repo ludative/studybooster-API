@@ -1,0 +1,8 @@
+interface IPagination {
+    count: Int!
+}
+
+interface IDate {
+    createdAt: String
+    updatedAt: String
+}

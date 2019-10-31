@@ -1,0 +1,10 @@
+interface IUser {
+    id: ID
+    email: String
+    nickname: String
+    introduction: String
+    profileImage: String
+    deleted: Boolean
+    isAdmin: Boolean
+    isValidEmail: Boolean
+}

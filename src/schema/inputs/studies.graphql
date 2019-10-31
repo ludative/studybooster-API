@@ -1,0 +1,41 @@
+input StudyInput {
+  id: ID
+  name: String!
+  description: String!
+  startDate: Float!
+  endDate: Float!
+  startTime: Int!
+  endTime: Int!
+  weekPeriod: Int!
+  location: String!
+  customSubject: String
+  thumbnail: String
+  limitedMemberCount: Int
+  isPrivate: Boolean!
+  UserId: Int!
+  StudySubjectId: Int
+  StudyDays: [StudyDayInput]!
+}
+
+input GetStudyInput {
+  name: String
+  description: String
+  startDate: Float
+  endDate: Float
+  startTime: Int
+  endTime: Int
+  weekPeriod: Int
+  location: String
+  customSubject: String
+  limitedMemberCount: Int
+  isPrivate: Boolean
+  UserId: Int
+  StudyDays: [StudyDayInput]
+  orderBy: String
+  orderDirection: String
+}
+
+input StudyDayInput {
+  id: ID
+  day: Int!
+}
