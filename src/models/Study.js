@@ -23,12 +23,12 @@ export default (sequelize, DataTypes) => {
     startTime: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      comment: "스터디 당 시작시간"
+      comment: "스터디 당 시작시간: ex) 1100"
     },
     endTime: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      comment: "스터디 당 종료시간"
+      comment: "스터디 당 종료시간, ex) 2300"
     },
     weekPeriod: {
       type: DataTypes.INTEGER,
@@ -52,11 +52,11 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       comment: "스터디 제한인원"
     },
-
     isPrivate: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
+      allowNull: false,
+      comment: "공개 / 비공개 설정"
     }
   });
 };

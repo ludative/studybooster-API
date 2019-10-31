@@ -1,0 +1,16 @@
+input StudyMemberInput {
+    id: ID!
+    isApprove: Boolean
+    isReject: Boolean
+    rejectReason: String
+    isBanish: Boolean
+    banishReason: String
+}
+
+input GetStudyMemberInput {
+    isApprove: Boolean
+    isReject: Boolean
+    isBanish: Boolean
+    orderBy: String
+    orderDirection: String
+}
