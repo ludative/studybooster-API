@@ -13,6 +13,12 @@
 type Query {
   getUsers(paginationParams: PaginationInput, searchingText: String): GetUsers
   getUserById(id: Int!): User
+  getStudies(
+    paginationParams: PaginationInput
+    params: GetStudyInput
+    isMine: Boolean!
+  ): GetStudy
+  getStudyById(id: Int!): Study
   getStudyBoards(
     paginationParams: PaginationInput
     studyId: Int!
@@ -38,6 +44,8 @@ type Mutation {
   signIn(email: String!, password: String!): UserWithToken
   updateUser(params: UserInput): User!
   createStudy(params: StudyInput): Study
+  updateStudy(params: StudyInput, studyId: Int!): Study
+  deleteStudy(studyId: Int!): Success
   sendMailValidation: Success
   updatePassword(password: String!, newPassword: String!): User!
   resetPassword(email: String!): Success

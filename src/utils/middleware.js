@@ -59,7 +59,8 @@ export const authenticatedStudyAdminMiddleware = (next, errorMessage) => async (
     }
   });
 
-    if (!isStudyAdmin) throw new Error(errorMessage || '스터디를 생성한 관리자만 수정가능합니다.');
+  if (!isStudyAdmin)
+    throw new Error(errorMessage || "스터디를 생성한 관리자만 수정가능합니다.");
 
   return next(root, args, context, info);
 };
