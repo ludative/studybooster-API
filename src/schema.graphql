@@ -28,7 +28,7 @@ type Query {
   getStudyBookmarks(paginationParams: PaginationInput): GetStudy
   getStudyAttends(
     paginationParams: PaginationInput
-    params: GetStudyAttendInput
+    studyId: Int!
   ): GetStudyAttend
   getStudyAttendById(id: Int!): StudyAttend
 }
