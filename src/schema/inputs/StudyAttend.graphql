@@ -5,3 +5,8 @@ input StudyAttendInput {
   UserId: Int!
   StudyId: Int!
 }
+
+input GetStudyAttendInput {
+  UserId: Int!
+  StudyId: Int!
+}

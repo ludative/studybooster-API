@@ -2,13 +2,10 @@ import models from "../../models";
 import calculatePagination from "../../utils/calculatePagination";
 import { authenticatedMiddleware } from "../../utils/middleware";
 
-const getStudyAttends = async (
-  _,
-  { paginationParams, studyId: StudyId },
-  context
-) => {
+const getStudyAttends = async (_, { paginationParams, params }, context) => {
+  const { StudyId, UserId } = params;
   const attends = await models.StudyAttend.findAndCountAll({
-    where: { StudyId },
+    where: { StudyId, UserId },
     order: [["createdAt", "DESC"]],
     ...calculatePagination({ ...paginationParams })
   });

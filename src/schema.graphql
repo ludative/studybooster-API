@@ -26,7 +26,10 @@ type Query {
   getStudyActionLogs: [StudyActionLog]
   getIsStudyBookmark(studyId: Int!): StudyBookmark
   getStudyBookmarks(paginationParams: PaginationInput): GetStudy
-  getStudyAttends(paginationParams: PaginationInput): GetStudyAttend
+  getStudyAttends(
+    paginationParams: PaginationInput
+    params: GetStudyAttendInput
+  ): GetStudyAttend
   getStudyAttendById(id: Int!): StudyAttend
 }
 
@@ -54,5 +57,12 @@ type Mutation {
   createStudyActionLog(status: StudyActionLogEnum!, studyId: Int!): Success
   toggleStudyBookmark(studyId: Int!): StudyBookmark
   createStudyAttend(params: StudyAttendInput!): StudyAttend
-  updateStudyAttend(params: StudyAttendInput!, studyId: Int!): StudyAttend
+  updateStudyAttendByAttendee(
+    params: StudyAttendInput!
+    studyId: Int!
+  ): StudyAttend
+  updateStudyAttendByAdmin(
+    params: StudyAttendInput!
+    studyId: Int!
+  ): StudyAttend
 }

@@ -1,22 +1,42 @@
 import models from "../../models";
-import calculatePagination from "../../utils/calculatePagination";
+
+import moment from "moment";
+
 import {
   authenticatedMiddleware,
   authenticatedStudyAdminMiddleware
 } from "../../utils/middleware";
 
 const createStudyAttend = async (_, { params }) => {
-  return await models.StudyAttend.create({ ...params, confirmed: false });
+  return await models.StudyAttend.create({
+    ...params,
+    confirmedCount: 1,
+    confirmed: false
+  });
 };
 
-const updateStudyAttend = async (_, { params, studyId }) => {
+const updateStudyAttendByAttendee = async (_, { params }) => {
   const attend = await models.StudyAttend.findByPk(params.id);
-  return await attend.update({ ...params });
+  return await attend.update({ ...params, confirmed: false });
+};
+
+const updateStudyAttendByAdmin = async (_, { params }) => {
+  const attend = await models.StudyAttend.findByPk(params.id);
+  return await attend.update({
+    ...params,
+    confirmed: true,
+    confirmedDate: moment().valueOf()
+  });
 };
 
 const studyAttendMutations = {
   createStudyAttend: authenticatedMiddleware(createStudyAttend),
-  updateStudyAttend: authenticatedStudyAdminMiddleware(updateStudyAttend)
+  updateStudyAttendByAttendee: authenticatedMiddleware(
+    updateStudyAttendByAttendee
+  ),
+  updateStudyAttendByAdmin: authenticatedStudyAdminMiddleware(
+    updateStudyAttendByAdmin
+  )
 };
 
 export default studyAttendMutations;
