@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r esm --inspect ./index.js",
+    "dev": "nodemon -r esm --inspect ./index.js",
+    "prod": "node ./src/index.js",
+    "start": "pm2 start ecosystem.config.js --env production",
     "test": "exit"
   },
   "author": "",
