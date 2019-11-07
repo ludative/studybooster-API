@@ -36,5 +36,6 @@ const server = new ApolloServer({
 });
 
 server.listen({ port: config.port }).then(({ url }) => {
+  console.log('travis pull request test');
   console.log(`🚀  Server ready at ${url}`);
 });
