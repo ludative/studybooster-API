@@ -1,0 +1,13 @@
+type StudyBoardComment implements IStudyBoardComment & IDate {
+  id: ID
+  comment: String!
+  UserId: Int!
+  StudyBoardId: Int!
+  createdAt: String
+  updatedAt: String
+}
+
+type GetStudyBoardComments implements IPagination {
+  count: Int!
+  rows: [StudyBoardComment]
+}

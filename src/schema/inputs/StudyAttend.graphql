@@ -1,0 +1,7 @@
+input StudyAttendInput {
+  id: ID
+  confirmed: Boolean
+  confirmedDate: Float
+  UserId: Int!
+  StudyId: Int!
+}

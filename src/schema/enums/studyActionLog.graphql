@@ -1,0 +1,4 @@
+enum StudyActionLogEnum {
+    APPROVE
+    EXIT
+}

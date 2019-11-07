@@ -3,10 +3,6 @@ const config = {
   version: "0.1",
   port: 4000,
   db: {
-    host: "your host",
-    database: "your db",
-    username: "your username",
-    password: "your db password",
     dialect: "mysql",
     timezone: "+09:00",
     forceSync: false,

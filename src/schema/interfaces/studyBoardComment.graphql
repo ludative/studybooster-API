@@ -1,0 +1,6 @@
+interface IStudyBoardComment {
+  id: ID
+  comment: String
+  UserId: Int
+  StudyBoardId: Int
+}

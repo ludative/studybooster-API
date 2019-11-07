@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt-nodejs";
-import models from "./models";
+import models from "./src/models";
 import config from "./config";
 
 export default async () => {

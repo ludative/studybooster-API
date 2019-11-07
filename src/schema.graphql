@@ -1,0 +1,78 @@
+# import * from "./schema/interfaces/index.graphql"
+# import * from "./schema/inputs/index.graphql"
+# import * from "./schema/enums/index.graphql"
+# import * from "./schema/users.graphql"
+# import * from "./schema/studies.graphql"
+# import * from "./schema/common.graphql"
+# import * from "./schema/studyBoard.graphql"
+# import * from "./schema/studyBoardComment.graphql"
+# import * from "./schema/studyMember.graphql"
+# import * from "./schema/studyActionLog.graphql"
+# import * from "./schema/studyBookmark.graphql"
+# import * from "./schema/studyAttend.graphql"
+
+type Query {
+  getUsers(paginationParams: PaginationInput, searchingText: String): GetUsers
+  getUserById(id: Int!): User
+  getStudies(
+    paginationParams: PaginationInput
+    params: GetStudyInput
+    isMine: Boolean!
+  ): GetStudy
+  getStudyById(id: Int!): Study
+  getStudyBoards(
+    paginationParams: PaginationInput
+    studyId: Int!
+    category: StudyBoardCategory
+  ): GetStudyBoards
+  getStudyBoardById(id: Int!): StudyBoard
+  getStudyBoardComments(
+    paginationParams: PaginationInput
+    studyBoardId: Int!
+  ): GetStudyBoardComments
+  getStudyMembers(
+    paginationParams: PaginationInput
+    params: GetStudyMemberInput
+    studyId: Int!
+  ): GetStudyMember
+  getStudyActionLogs: [StudyActionLog]
+  getIsStudyBookmark(studyId: Int!): StudyBookmark
+  getStudyBookmarks(paginationParams: PaginationInput): GetStudy
+  getStudyAttends(
+    paginationParams: PaginationInput
+    studyId: Int!
+  ): GetStudyAttend
+  getStudyAttendById(id: Int!): StudyAttend
+}
+
+type Mutation {
+  signUp(params: UserInput): User!
+  signIn(email: String!, password: String!): UserWithToken
+  updateUser(params: UserInput): User!
+  createStudy(params: StudyInput): Study
+  updateStudy(params: StudyInput, studyId: Int!): Study
+  deleteStudy(studyId: Int!): Success
+  sendMailValidation: Success
+  updatePassword(password: String!, newPassword: String!): User!
+  resetPassword(email: String!): Success
+  deleteUser: Success
+  createStudyBoard(params: StudyBoardInput): StudyBoard
+  deleteStudyBoard(id: Int!, studyId: Int!): Success
+  updateStudyBoard(params: StudyBoardInput, studyId: Int!): StudyBoard
+  createStudyBoardComment(
+    comment: String!
+    studyBoardId: Int!
+  ): StudyBoardComment
+  deleteStudyBoardComment(id: Int!): Success
+  updateStudyBoardComment(id: Int!, comment: String!): StudyBoardComment
+  createMember(studyId: Int!): StudyMember
+  createMemberByInvite: StudyMember
+  updateMember(params: [StudyMemberInput], studyId: Int!): [StudyMember]
+  deleteMember(studyId: Int!): Success
+  createStudyActionLog(status: StudyActionLogEnum!, studyId: Int!): Success
+  toggleStudyBookmark(studyId: Int!): StudyBookmark
+  createStudyAttend(params: StudyAttendInput!): StudyAttend
+  updateStudyAttendByAttendee(id: Int!, studyId: Int!): StudyAttend
+  updateStudyAttendByAdmin(id: Int!, studyId: Int!): StudyAttend
+  sendMailToInvitedUsers(userIds: [ID]!, studyId: Int!): Success
+}
