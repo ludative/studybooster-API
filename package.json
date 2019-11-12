@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -r esm --inspect ./index.js",
-    "prod": "node ./src/index.js",
+    "prod": "node ./index.js",
     "start": "pm2 start ecosystem.config.js --env production",
     "test": "exit"
   },
