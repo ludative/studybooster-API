@@ -31,7 +31,7 @@ deploy: # 배포
     bundle_type: zip # 버킷에 저장되어 있는 파일의 확장자
     application: studybooster-webservice # AWS 배포 애플리케이션
     deployment_group: studybooster-webservice-group # AWS 배포 애플리케이션에 만들어져 있는 배포 그룹
-    region: ap-northeast-2
+    region: us-east-2
     wait-until-deployed: true
     on:
       repo: ludative/studybooster-API
