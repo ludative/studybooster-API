@@ -15,7 +15,7 @@ deploy: # 배포
   - provider: s3 # AWS S3를 의미
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: ludative-travis-ci # S3에 생성한 버킷
+    bucket: ludative-travis-ci-bucket # S3에 생성한 버킷
     region: us-east-2
     skip_cleanup: true
     local_dir: deploy # deploy 디렉터리에 있는 파일을 s3로 업로드 하겠다는 의미
@@ -26,7 +26,7 @@ deploy: # 배포
   - provider: codedeploy # AWS CodeDeploy를 의미
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: ludative-travis-ci # AWS CodeDeploy가 다운로드 받은 버킷
+    bucket: ludative-travis-ci-bucket # AWS CodeDeploy가 다운로드 받은 버킷
     key: studybooster-API.zip # 해당 버킷에 저장되어 있는 파일 이름
     bundle_type: zip # 버킷에 저장되어 있는 파일의 확장자
     application: studybooster-webservice # AWS 배포 애플리케이션
