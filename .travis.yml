@@ -37,8 +37,4 @@ deploy: # 배포
       repo: ludative/studybooster-API
       branch: master
 notifications:
-  email:
-    recipients:
-      - kkangil94@naver.com
-      - cok2exe@gmail.com
-      - wrfg12@gmail.com
+  slack: ludative:8x1AXChDgGNZ9o4MVCEwd9xI
