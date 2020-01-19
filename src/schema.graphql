@@ -75,4 +75,5 @@ type Mutation {
   updateStudyAttendByAttendee(id: Int!, studyId: Int!): StudyAttend
   updateStudyAttendByAdmin(id: Int!, studyId: Int!): StudyAttend
   sendMailToInvitedUsers(userIds: [ID]!, studyId: Int!): Success
+  updateUserIsValidEmail(token: String!): Success
 }

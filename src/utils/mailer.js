@@ -32,7 +32,7 @@ export const getMailValidationContent = ({email, token}) => {
     return {
         to: email,
         subject: '스터디부스터 이메일 검증',
-        content: `<div>아래 링크로 접속하여 이메일 검증을 완료해주세요!</div><div>이메일 검증하기: ${process.env.HOST_NAME}/validation/${token}</div>`
+        content: `<div>아래 링크로 접속하여 이메일 검증을 완료해주세요!</div><div><a target="_blank" href='${process.env.HOST_NAME}/validation/${token}'>이메일 검증하기</a></div>`
     };
 };
 
@@ -48,6 +48,6 @@ export const getMailInviteStudy = ({email, studyTitle, token}) => {
     return {
         to: email,
         subject: '스터디부스터 초대 메일',
-        content: `<div><b>${studyTitle}</b>에 당신을 초대합니다. 아래 링크로 접속하면 자동으로 신청 완료됩니다.</div><div>초대 응답하기: ${process.env.HOST_NAME}/invited/${token}</div>`
+        content: `<div><b>${studyTitle}</b>에 당신을 초대합니다. 아래 링크로 접속하면 자동으로 신청 완료됩니다.</div><div><a target="_blank" href='${process.env.HOST_NAME}/invited/${token}'>초대 응답하기</a></div>`
     };
 };
