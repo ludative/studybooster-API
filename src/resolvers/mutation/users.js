@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import models from "../../models";
-import { createToken } from "../../utils/token";
+import {createToken, verifyToken} from "../../utils/token";
 import { encryptPassword, comparePassword } from "../../utils/bcrypt";
 import {getMailResetPassword, getMailValidationContent, sendMail} from "../../utils/mailer";
 import generateRandomString from "../../utils/genarateRandomString";
@@ -126,6 +126,17 @@ const deleteUser = async (_, args, {user}) => {
   return {isSuccess: true};
 };
 
+const updateUserIsValidEmail = async (_, {token}) => {
+  if (!token) throw new Error('잘못된 접근입니다.');
+  const verifiedToken = await verifyToken(token);
+  if (!verifiedToken.id) throw new Error("잘못된 접근입니다.");
+  const user = await models.User.findByPk(verifiedToken.id);
+  await user.update({
+    isValidEmail: true
+  });
+  return {isSuccess: true}
+};
+
 const usersMutation = {
   signUp,
   signIn,
@@ -133,7 +144,8 @@ const usersMutation = {
   updateUser: authenticatedMiddleware(updateUser),
   updatePassword: authenticatedMiddleware(updatePassword),
   resetPassword,
-  deleteUser: authenticatedMiddleware(deleteUser)
+  deleteUser: authenticatedMiddleware(deleteUser),
+  updateUserIsValidEmail,
 };
 
 export default usersMutation;
